@@ -134,4 +134,15 @@ app.post('/api/checkout', verifyFirebase, async (req, res) => {
   }
 });
 
+app.post('/webhook', (req, res) => {
+  console.log('Salla Webhook:', JSON.stringify(req.body, null, 2));
+
+  if (req.body?.data?.access_token) {
+    console.log('ACCESS TOKEN:', req.body.data.access_token);
+  }
+
+  res.sendStatus(200);
+});
+
+
 app.listen(PORT, () => console.log(`Laveen Salla backend running on :${PORT}`));
