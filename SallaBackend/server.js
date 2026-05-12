@@ -144,5 +144,23 @@ app.post('/webhook', (req, res) => {
   res.sendStatus(200);
 });
 
+app.get('/products', async (req, res) => {
+  try {
+    const response = await axios.get(
+      'https://api.salla.dev/admin/v2/products',
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.SALLA_ACCESS_TOKEN}`
+        }
+      }
+    );
+
+    res.json(response.data);
+
+  } catch (err) {
+    res.status(500).json(err.response?.data || err.message);
+  }
+});
+
 
 app.listen(PORT, () => console.log(`Laveen Salla backend running on :${PORT}`));
